@@ -2,6 +2,8 @@ import * as cdk from 'aws-cdk-lib'
 import * as pipelines from 'aws-cdk-lib/pipelines'
 import { Construct } from 'constructs'
 
+import { CDKPipelineAppStage } from './stage'
+
 export class CiCdAwsPipelineDemoStack extends cdk.Stack {
 
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -18,6 +20,11 @@ export class CiCdAwsPipelineDemoStack extends cdk.Stack {
                 ]
             })
         })
+
+        const testingStage = pipeline.addStage(new CDKPipelineAppStage(this, 'test'))
+        testingStage.addPost(new pipelines.ManualApprovalStep('Manual approval before production deployment'))
+
+        const prodStage = pipeline.addStage(new CDKPipelineAppStage(this, 'prod'))
     }
 }
 
