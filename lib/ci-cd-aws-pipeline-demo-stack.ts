@@ -21,8 +21,8 @@ export class CiCdAwsPipelineDemoStack extends cdk.Stack {
             })
         })
 
-        const testingStage = pipeline.addStage(new CDKPipelineAppStage(this, 'test'))
-        testingStage.addPost(new pipelines.ManualApprovalStep('Manual approval before production deployment'))
+        const testStage = pipeline.addStage(new CDKPipelineAppStage(this, 'test'))
+        testStage.addPost(new pipelines.ManualApprovalStep('Manual approval before production deployment'))
 
         const prodStage = pipeline.addStage(new CDKPipelineAppStage(this, 'prod'))
     }

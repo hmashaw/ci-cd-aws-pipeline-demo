@@ -10,9 +10,7 @@ export class CDKPipelineAppStage extends cdk.Stage {
         props?: cdk.StackProps) {
 
             super(scope, stageName, props)
-
             const lambdaStack = new CDKDemoLambdaStack(this, 'CDKDemoLambdaStack', stageName)
-        
         }
 }
 
